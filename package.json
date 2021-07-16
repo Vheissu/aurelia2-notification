@@ -1,0 +1,48 @@
+{
+    "name": "aurelia2-notification",
+    "version": "0.0.3",
+    "description": "Aurelia notification library",
+    "main": "dist/index.js",
+    "module": "dist/aurelia2-notification.es.js",
+    "browser": "dist/aurelia2-notification.bundle.js",
+    "types": "dist/index.d.ts",
+    "repository": "https://github.com/Vheissu/aurelia2-notification",
+    "author": "Dwayne Charrington <dwaynecharrington@gmail.com",
+    "license": "MIT",
+    "scripts": {
+        "build": "rollup -c && tsc",
+        "build:watch": "rollup -cw",
+        "test": "jest",
+        "can:release": "npm run build && npm run test"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.14.6",
+        "@babel/preset-env": "^7.14.7",
+        "@babel/preset-typescript": "^7.14.5",
+        "@rollup/plugin-html": "^0.2.3",
+        "@types/jest": "^26.0.23",
+        "autoprefixer": "^10.2.6",
+        "babel-jest": "^27.0.6",
+        "cssnano": "^5.0.6",
+        "jest": "^27.0.6",
+        "jest-cli": "^27.0.6",
+        "jest-transform-stub": "^2.0.0",
+        "postcss-url": "^10.1.3",
+        "rollup": "^2.52.7",
+        "rollup-plugin-copy": "^3.4.0",
+        "rollup-plugin-html": "^0.2.1",
+        "rollup-plugin-postcss": "^4.0.0",
+        "rollup-plugin-terser": "^7.0.2",
+        "rollup-plugin-typescript2": "^0.30.0",
+        "ts-jest": "^27.0.3",
+        "typescript": "^4.3.5"
+    },
+    "dependencies": {
+        "@aurelia/i18n": "dev",
+        "@aurelia/kernel": "dev",
+        "@aurelia/runtime": "dev",
+        "@aurelia/runtime-html": "dev",
+        "extend": "^3.0.2",
+        "humane-js": "^3.2.2"
+    }
+}
