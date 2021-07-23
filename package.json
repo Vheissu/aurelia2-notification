@@ -1,6 +1,6 @@
 {
     "name": "aurelia2-notification",
-    "version": "0.0.3",
+    "version": "0.0.9",
     "description": "Aurelia notification library",
     "main": "dist/index.js",
     "module": "dist/aurelia2-notification.es.js",
@@ -13,7 +13,10 @@
         "build": "rollup -c && tsc",
         "build:watch": "rollup -cw",
         "test": "jest",
-        "can:release": "npm run build && npm run test"
+        "can:release": "npm run build && npm run test",
+        "patch": "npm version patch --force && npm publish",
+        "minor": "npm version minor --force && npm publish",
+        "major": "npm version major --force && npm publish"
     },
     "devDependencies": {
         "@babel/core": "^7.14.6",
