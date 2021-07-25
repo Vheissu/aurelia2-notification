@@ -1,4 +1,4 @@
-import { INotificationConfig } from "config";
+import { INotificationConfig } from "./config";
 import Humane from "humane-js";
 import extend from "extend";
 import { DI, IPlatform } from "@aurelia/kernel";
@@ -8,11 +8,13 @@ export const INotification = DI.createInterface<INotification>('INotification', 
 export interface INotification extends Notification {}
 
 export class Notification {
+  readonly humane = Humane;
+  protected notify;
+
   constructor(
     @INotificationConfig readonly config: INotificationConfig,
     @IPlatform readonly platform: IPlatform,
-    @I18N readonly i18n: I18N,
-    readonly humane: Humane
+    @I18N readonly i18n: I18N
   ) {
     this.setBaseCls();
 
@@ -21,30 +23,12 @@ export class Notification {
         this[key] = this.spawn(config.notifications[key]);
       }
     }
-
-    // ensure humane.container is document.body after 'aurelia-composed'
-    if (!humane.container) {
-        this.setContainer();
-
-        let aureliaComposedListener = () => {
-          if (!humane.container) {
-            this.setContainer();
-          }
-
-          this.platform.globalThis.removeEventListener('aurelia-composed', aureliaComposedListener);
-        };
-  
-        this.platform.globalThis.addEventListener('aurelia-composed', aureliaComposedListener);
-      }
   }
 
   setBaseCls(baseCls = this.config.defaults.baseCls) {
     this.humane.baseCls = baseCls ? baseCls : this.humane.baseCls;
-  }
 
-  setContainer(container?) {
-    this.platform.globalThis.appendNode(this.humane.el, container); // if container null or undefined,  appends to document.body
-    this.humane.container = this.humane.el.parentNode;
+    this.notify = this.humane.create();
   }
 
   spawn(addnDefaults) {
@@ -55,7 +39,7 @@ export class Notification {
     let defaults = extend({}, this.config.defaults, addnDefaults);
 
     return (message, options) => {
-      return console.log(message, options, defaults);
+      return this.log(message, options, defaults);
     };
   }
 
@@ -75,13 +59,13 @@ export class Notification {
     }
 
     return new Promise(resolve => {
-      return this.humane.log(message, options, resolve, defaults);
+      return this.notify.log(message, options, resolve, defaults);
     });
   }
 
   remove() {
     return new Promise(resolve => {
-      return this.humane.remove(resolve);
+      return this.notify.remove(resolve);
     });
   }
 
