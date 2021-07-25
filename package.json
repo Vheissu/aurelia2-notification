@@ -1,6 +1,6 @@
 {
     "name": "aurelia2-notification",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "description": "Aurelia notification library",
     "main": "dist/index.js",
     "module": "dist/aurelia2-notification.es.js",
