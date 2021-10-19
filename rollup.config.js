@@ -10,7 +10,7 @@ import replace from '@rollup/plugin-replace';
 // import copy from 'rollup-plugin-copy';
 
 const tsPluginConfig = typescript({
-    tsconfig: 'tsconfig.build.json',
+    tsconfig: 'tsconfig.json',
     sourceMap: true,
     include: ['src/**/*.ts'],
     noEmitOnError: false,
